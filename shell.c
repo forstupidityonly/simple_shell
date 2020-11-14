@@ -25,16 +25,18 @@ int main(void)
 		if (chars == EOF)
 		{
 			printf("EOF\n");
+			free_list(head);
+			free(buffer);
 			return (0);
 		}
 		head = path_tok(s, node);
 		print_list(head);
 		printf("%s\n", s);
 		printf("%s\n", buffer);
-		buffer = NULL;
+		free(buffer);
 		bufsize = 0;
 	}
 	free_list(head);
+	free(buffer);
 	return (0);
 }
-
