@@ -8,9 +8,10 @@
 list_t *path_tok(char *path, list_t *head)
 {
 	char *token;
+	list_t *be_gone;
 	printf("path = %s\n", path);
 	token = strtok(path, ":");
-	add_node(&head, token);
+	be_gone = add_node(&head, token);
 
 	while (token != NULL)
 	{
@@ -19,6 +20,6 @@ list_t *path_tok(char *path, list_t *head)
 		add_node(&head, token);
 		printf("head = %s\n", head->str);
 	}
-
+	free_list(be_gone);
 	return (head);
 }

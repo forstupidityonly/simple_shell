@@ -15,8 +15,10 @@ int main(void)
 	list_t *head;
 	list_t *node = NULL;
 
-	head = node;
 	s = _getenv("PATH");
+	head = path_tok(s, node);
+	free(s);
+	print_list(head);
 	while (1)
 	{
 		if(isatty(STDIN_FILENO))
@@ -25,16 +27,17 @@ int main(void)
 		if (chars == EOF)
 		{
 			printf("EOF\n");
+			free_list(head);
+			free(buffer);
 			return (0);
 		}
-		head = path_tok(s, node);
-		print_list(head);
 		printf("%s\n", s);
 		printf("%s\n", buffer);
-		buffer = NULL;
+		free(buffer);
 		bufsize = 0;
 	}
 	free_list(head);
+	free(buffer);
 	return (0);
 }
 
