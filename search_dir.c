@@ -23,17 +23,19 @@ DIR *search_dir(list_t *head, char *command)
 		{
 			if ((_strcmp(dent->d_name, ".") == 1)
 			|| (_strcmp(dent->d_name, "..") == 1))
-				continue;
-			if (_strcmp(command, dent->d_name) == 1)
 			{
-				printf("dirent: %s\n", dent->d_name);
-				closedir(directory);
+				printf("continue\n");
+				continue;
+			}
+			if (_strcmp(command, dent->d_name) == 0)
+			{
+				printf("found: ");
 				return (directory);
 			}
-			printf("dirent: %s\n", dent->d_name);
 		}
 		closedir(directory);
 		head = head->next;
 	}
+	printf("not found");
 	return (NULL);
 }

@@ -17,6 +17,7 @@ int main(void)
 
 	head = node;
 	s = _getenv("PATH");
+	head = path_tok(s, node);
 	while (1)
 	{
 		if(isatty(STDIN_FILENO))
@@ -29,9 +30,7 @@ int main(void)
 			free(buffer);
 			return (0);
 		}
-		head = path_tok(s, node);
 		search_dir(head, buffer);
-		printf("%s\n", s);
 		printf("%s\n", buffer);
 		free(buffer);
 		bufsize = 0;
