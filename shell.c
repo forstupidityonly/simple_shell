@@ -34,6 +34,7 @@ int main(void)
 		buffer = NULL;
 		bufsize = 0;
 	}
+	free_list(head);
 	return (0);
 }
 
