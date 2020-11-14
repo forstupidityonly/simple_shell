@@ -1,8 +1,13 @@
 #include "shell.h"
 
 /**
+ * path_tok - tokenizes the PATH variable
+ * into a singly linked list.
  *
+ * @path: char pointer to PATH as a character string
+ * @head: head of a new singly linked list
  *
+ * Return: head of list with PATH tokenized
  */
 
 list_t *path_tok(char *path, list_t *head)
@@ -14,10 +19,8 @@ list_t *path_tok(char *path, list_t *head)
 
 	while (token != NULL)
 	{
-		printf("token: %s\n", token);
 		token = strtok(NULL, ":");
 		add_node(&head, token);
-		printf("head = %s\n", head->str);
 	}
 
 	return (head);

@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <dirent.h>
 
 /*____ STRUCTURES _____*/
 
@@ -28,5 +29,7 @@ size_t print_list(const list_t *h);
 list_t *path_tok(char *path, list_t *head);
 list_t *add_node(list_t **head, const char *str);
 void free_list(list_t *head);
+DIR *search_dir(list_t *, char *);
+char *_strdup(char *str);
 
 #endif

@@ -30,7 +30,7 @@ int main(void)
 			return (0);
 		}
 		head = path_tok(s, node);
-		print_list(head);
+		search_dir(head, buffer);
 		printf("%s\n", s);
 		printf("%s\n", buffer);
 		free(buffer);
