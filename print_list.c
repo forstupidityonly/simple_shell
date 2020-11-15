@@ -1,9 +1,13 @@
 #include "shell.h"
+
 /**
-  * print_list - print single linked list
-  * @h: the head
-  * Return: num of elements
-  */
+ * print_list - print single linked list
+ *
+ * @h: head of list
+ *
+ * Return: number of elements
+ */
+
 size_t print_list(const list_t *h)
 {
 	size_t elements = 0;

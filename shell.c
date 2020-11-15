@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
-  * main - runs a shell
-  *
-  * Return: 0 when terminated
-  */
+ * main - runs a simple shell
+ *
+ * Return: 0 when terminated
+ */
 
 int main(void)
 {
@@ -18,9 +18,10 @@ int main(void)
 	head = node;
 	s = _getenv("PATH");
 	head = path_tok(s, node);
+
 	while (1)
 	{
-		if(isatty(STDIN_FILENO))
+		if (isatty(STDIN_FILENO))
 			printf("prompt$ ");
 		chars = getline(&buffer, &bufsize, stdin);
 		if (chars == EOF)

@@ -12,6 +12,16 @@
 
 /*____ STRUCTURES _____*/
 
+/**
+ * struct list_s - singly linked list
+ * @str: string - (malloc'ed string)
+ * @len: length of the string
+ * @next: points to the next node
+ *
+ * Description: singly linked list node structure
+ * for Holberton project
+ */
+
 typedef struct list_s
 {
 	char *str;
@@ -24,12 +34,12 @@ typedef struct list_s
 extern char **environ;
 char *_strcpy(char *dest, char *src, int n);
 int _strcmp(char *s1, char *s2);
-char *_getenv(char *name);
-size_t print_list(const list_t *h);
-list_t *path_tok(char *path, list_t *head);
-list_t *add_node(list_t **head, const char *str);
-void free_list(list_t *head);
-DIR *search_dir(list_t *, char *);
 char *_strdup(char *str);
+char *_getenv(char *name);
+/* size_t print_list(const list_t *h); */
+list_t *path_tok(char *s, list_t *node);
+list_t *add_node(list_t **node, const char *token);
+void free_list(list_t *head);
+DIR *search_dir(list_t *head, char *buffer);
 
 #endif

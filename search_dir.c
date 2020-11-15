@@ -4,14 +4,15 @@
  * search_dir - this searches through the path for matching
  * directory from env variable
  *
- * @path - linked list of PATH
+ * @head: linked list of PATH
+ * @buffer: token from buffer to find in dir
  *
  * Return: pointer to a matched file
  * OR -1 if fail
  * OR match not found
  */
 
-DIR *search_dir(list_t *head, char *command)
+DIR *search_dir(list_t *head, char *buffer)
 {
 	DIR *directory;
 	struct dirent *dent;
@@ -27,7 +28,7 @@ DIR *search_dir(list_t *head, char *command)
 				printf("continue\n");
 				continue;
 			}
-			if (_strcmp(command, dent->d_name) == 1)
+			if (_strcmp(buffer, dent->d_name) == 1)
 			{
 				printf("found: ");
 				/**closedir(directory);*/

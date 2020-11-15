@@ -1,20 +1,39 @@
 #include "shell.h"
+
 /**
-  * cpy string
-  */
+ * _strcpy - copies string from one character string to another
+ *
+ * @dest: char string to be copied to
+ * @src: char string to be copied from
+ * @n: number of char to be copied
+ *
+ * Return: pointer to copied string (dest)
+ */
+
 char *_strcpy(char *dest, char *src, int n)
 {
 	int i;
 
 	for (i = 0; i < n && src[i] != '\0'; i++)
-		dest[i]= src[i];
+		dest[i] = src[i];
 	for (; i < n; i++)
 		dest[i] = '\0';
 	return (dest);
 }
+
 /**
-  * cmp string
-  */
+ * _strcmp - compates to char strings to see if the match
+ *
+ * _!_ - This version of strcmp makes sure that newline is
+ * not counted as a matchable char
+ *
+ * @s1: string 1 to compare
+ * @s2: string 2 to compare
+ *
+ * Return: 1 if strings match
+ * OR 0 if strings do not match
+ */
+
 int _strcmp(char *s1, char *s2)
 {
 	unsigned int i = 0;
@@ -29,14 +48,19 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
-  * _strdup - dup a string
-  * @str: the string
-  * Return: NULL if str = NULL
-  */
+ * _strdup - duplicates a string
+ *
+ * @str: string to be duplicated
+ *
+ * Return: NULL if string is NULL
+ * OR pointer to new duplicated string
+ */
+
 char *_strdup(char *str)
 {
 	unsigned int i, j = 0;
 	char *dest;
+
 	if (str == NULL)
 		return (0);
 	for (i = 0; str[i]; i++)

@@ -1,7 +1,12 @@
 #include "shell.h"
 /**
-  *
-  */
+ * _getenv - retrieves the environment variable
+ *
+ * @name: character string, containing the name of
+ * the env variable name to search for.
+ *
+ * Return: poninter to tokenized variable (PATH)
+ */
 char *_getenv(char *name)
 {
 	char *env_val;
