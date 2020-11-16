@@ -51,7 +51,6 @@ int search_dir(list_t *head, char *buffer)
 	char **command;
 	int status;
 	pid_t child;
-	int i = 0;
 
 	while (head->next != NULL)
 	{
@@ -65,10 +64,7 @@ int search_dir(list_t *head, char *buffer)
 			if (_strcmp(buffer, dent->d_name) == 1)
 			{
 				command = command_tok(buffer);
-				for (; command[i]; i++)
-					printf("command: %s\n", command[i]);
 				filepath = set_filepath(head->str, buffer);
-				printf("filepath: [%s]\n", filepath);
 				child = fork();
 				if (!child)
 					execve((const char *)filepath, command, NULL);
@@ -83,6 +79,6 @@ int search_dir(list_t *head, char *buffer)
 		closedir(directory);
 		head = head->next;
 	}
-	printf("not found");
+	printf("command not found\n");
 	return (-1);
 }
