@@ -28,6 +28,7 @@ char **command_tok(char *buffer)
 	command[0] = strtok(buffer, " ");
 	for (i = 1; i < argcount; i++)
 		command[i] = strtok(NULL, " ");
+	command[i] = NULL;
 
 	return (command);
 }
