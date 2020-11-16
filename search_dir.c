@@ -1,9 +1,10 @@
 #include "shell.h"
 
-/**
+/*
  * set_filepath -
  *
  */
+
 char *set_filepath(char *path_token, char *filename)
 {
 	unsigned int i = 0, itr = 0;
@@ -37,14 +38,14 @@ char *set_filepath(char *path_token, char *filename)
  * OR match not found
  */
 
-DIR *search_dir(list_t *head, char *buffer)
+int search_dir(list_t *head, char *buffer)
 {
 	DIR *directory;
 	struct dirent *dent;
 	char *filepath;
+	char **command;
 	int status;
 	pid_t child;
-	char *const *c = NULL;
 
 	while (head->next != NULL)
 	{
@@ -58,21 +59,23 @@ DIR *search_dir(list_t *head, char *buffer)
 			}
 			if (_strcmp(buffer, dent->d_name) == 1)
 			{
+				command = command_tok(buffer);
 				filepath = set_filepath(head->str, buffer);
-				strtok(filepath, "\n");
 				printf("filepath: [%s]\n", filepath);
 				child = fork();
 				if (!child)
-					execve((const char*)filepath, c, NULL); /* 2ND ARG ARE OPTION FLAGS or ITEMS TO ACT ON */
+					execve((const char*)filepath, command, NULL); /* 2ND ARG ARE OPTION FLAGS or ITEMS TO ACT ON */
 				else
 					wait(&status);
-				/**closedir(directory);*/
-				return (directory);
+				closedir(directory);
+				free(filepath);
+				free(command);
+				return (1);
 			}
 		}
 		closedir(directory);
 		head = head->next;
 	}
 	printf("not found");
-	return (NULL);
+	return (-1);
 }

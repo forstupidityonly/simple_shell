@@ -42,7 +42,8 @@ char *_getenv(char *name);
 list_t *path_tok(char *s, list_t *node);
 list_t *add_node(list_t **node, const char *token);
 void free_list(list_t *head);
-DIR *search_dir(list_t *head, char *buffer);
+int search_dir(list_t *head, char *buffer);
 int _strlen(char *s);
+char **command_tok(char *buffer);
 
 #endif
