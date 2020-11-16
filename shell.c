@@ -22,11 +22,11 @@ int main(void)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf("prompt$ ");
+			write(1, "prompt$ ", 8);
 		chars = getline(&buffer, &bufsize, stdin);
 		if (chars == EOF)
 		{
-			printf("EOF\n");
+			write(1, "EOF\n", 4);
 			free_list(head);
 			free(buffer);
 			return (0);

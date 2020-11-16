@@ -79,6 +79,6 @@ int search_dir(list_t *head, char *buffer)
 		closedir(directory);
 		head = head->next;
 	}
-	printf("command not found\n");
+	write(1, "command not found\n", 18);
 	return (-1);
 }
