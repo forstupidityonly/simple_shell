@@ -1,8 +1,13 @@
 #include "shell.h"
 
-/*
- * set_filepath -
+/**
+ * set_filepath - creates a char string of the full path
+ * to the executable
  *
+ * @path_token: strtok of path
+ * @filename: buffer from getline
+ *
+ * Return: pointer to path char string
  */
 
 char *set_filepath(char *path_token, char *filename)
@@ -64,7 +69,7 @@ int search_dir(list_t *head, char *buffer)
 				printf("filepath: [%s]\n", filepath);
 				child = fork();
 				if (!child)
-					execve((const char*)filepath, command, NULL); /* 2ND ARG ARE OPTION FLAGS or ITEMS TO ACT ON */
+					execve((const char *)filepath, command, NULL);
 				else
 					wait(&status);
 				closedir(directory);

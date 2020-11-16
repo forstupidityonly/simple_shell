@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * command_tok -
+ * command_tok - tokenizes commands from getline
  *
- * @buffer:
+ * @buffer: input from getline
  *
- * Return: double pointer
+ * Return: double pointer to array commands from buffer
  */
 
 char **command_tok(char *buffer)
