@@ -32,7 +32,6 @@ int main(void)
 			return (0);
 		}
 		search_dir(head, buffer);
-		printf("%s\n", buffer);
 		free(buffer);
 		bufsize = 0;
 	}

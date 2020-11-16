@@ -1,6 +1,28 @@
 #include "shell.h"
 
 /**
+ * _strlen - outputs the length of a string
+ *
+ * @s: input of string stored in char pointer
+ *
+ * Return: int of string length
+ */
+
+int _strlen(char *s)
+{
+	int len;
+
+	len = 0;
+
+	while (s[len] != '\0')
+	{
+		len++;
+	}
+
+	return (len);
+}
+
+/**
  * _strcpy - copies string from one character string to another
  *
  * @dest: char string to be copied to
@@ -38,9 +60,9 @@ int _strcmp(char *s1, char *s2)
 {
 	unsigned int i = 0;
 
-	while (s1[i])
+	while (s2[i])
 	{
-		if ((s1[i] != s2[i]) && s1[i] != '\n')
+		if ((s2[i] != s1[i]) && s2[i] != '\n')
 			return (0);
 		++i;
 	}

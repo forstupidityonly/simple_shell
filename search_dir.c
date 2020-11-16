@@ -1,6 +1,31 @@
 #include "shell.h"
 
 /**
+ * set_filepath -
+ *
+ */
+char *set_filepath(char *path_token, char *filename)
+{
+	unsigned int i = 0, itr = 0;
+	unsigned int pathlen = _strlen(path_token);
+	unsigned int filelen = _strlen(filename);
+	char *filepath = malloc(sizeof(char) * ((pathlen + filelen) + 2));
+
+	for (; i < pathlen; i++)
+		filepath[i] = path_token[i];
+
+	filepath[i] = '/';
+	i++;
+
+	for (; itr < filelen; itr++, i++)
+		filepath[i] = filename[itr];
+
+	filepath[i] = '\0';
+
+	return (filepath);
+}
+
+/**
  * search_dir - this searches through the path for matching
  * directory from env variable
  *
@@ -16,6 +41,10 @@ DIR *search_dir(list_t *head, char *buffer)
 {
 	DIR *directory;
 	struct dirent *dent;
+	char *filepath;
+	int status;
+	pid_t child;
+	char *const *c = NULL;
 
 	while (head->next != NULL)
 	{
@@ -25,16 +54,21 @@ DIR *search_dir(list_t *head, char *buffer)
 			if ((_strcmp(dent->d_name, ".") == 1)
 			|| (_strcmp(dent->d_name, "..") == 1))
 			{
-				printf("continue\n");
 				continue;
 			}
 			if (_strcmp(buffer, dent->d_name) == 1)
 			{
-				printf("found: ");
+				filepath = set_filepath(head->str, buffer);
+				strtok(filepath, "\n");
+				printf("filepath: [%s]\n", filepath);
+				child = fork();
+				if (!child)
+					execve((const char*)filepath, c, NULL); /* 2ND ARG ARE OPTION FLAGS or ITEMS TO ACT ON */
+				else
+					wait(&status);
 				/**closedir(directory);*/
 				return (directory);
 			}
-			printf("dirent: %s\n", dent->d_name);
 		}
 		closedir(directory);
 		head = head->next;

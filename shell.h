@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <dirent.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 /*____ STRUCTURES _____*/
 
@@ -41,5 +43,6 @@ list_t *path_tok(char *s, list_t *node);
 list_t *add_node(list_t **node, const char *token);
 void free_list(list_t *head);
 DIR *search_dir(list_t *head, char *buffer);
+int _strlen(char *s);
 
 #endif
