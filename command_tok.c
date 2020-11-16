@@ -21,6 +21,7 @@ char **command_tok(char *buffer)
 		if (buffer[i] == ' ')
 			++argcount;
 	}
+	++argcount;
 
 	command = malloc((sizeof(char *) * argcount) + 1);
 
