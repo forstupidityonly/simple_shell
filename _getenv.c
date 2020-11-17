@@ -15,7 +15,7 @@ char *_getenv(char *name)
 
 	while (name[len] != '\0')
 		len++;
-	name_cpy = malloc((sizeof(char) * len) + 1);
+	name_cpy = malloc(sizeof(char) * (len + 1));
 	if (!name_cpy)
 		return (NULL);
 	_strcpy(name_cpy, name, len);
