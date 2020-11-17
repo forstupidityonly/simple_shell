@@ -14,6 +14,8 @@ int main(void)
 	char *s;
 	list_t *head;
 	list_t *node = NULL;
+	int i = 0;
+	char *exit = "exit";
 
 	head = node;
 	s = _getenv("PATH");
@@ -24,6 +26,9 @@ int main(void)
 		if (isatty(STDIN_FILENO))
 			write(1, "prompt$ ", 8);
 		chars = getline(&buffer, &bufsize, stdin);
+		i = _strcmp(buffer, exit);
+		if (i == 1)
+			break;
 		if (chars == EOF)
 		{
 			write(1, "EOF\n", 4);
