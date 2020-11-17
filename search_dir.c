@@ -48,10 +48,25 @@ int search_dir(list_t *head, char *buffer)
 	DIR *directory;
 	struct dirent *dent;
 	char *filepath;
-	char **command;
+	char **command = NULL;
 	int status;
+	int check = 0;
 	pid_t child;
 
+	if (buffer[0] == '/')
+	{
+		filepath = buffer;
+		strtok(filepath, "\n");
+		command = command_tok(buffer);
+		child = fork();
+		if (!child)
+			check = execve((const char *)filepath, command, NULL);
+		else
+			wait(&status);
+		if (check == -1)
+			write(1, "command not found\n", 18);
+		free(command);
+	} else {
 	while (head->next != NULL)
 	{
 		directory = opendir(head->str);
@@ -59,14 +74,12 @@ int search_dir(list_t *head, char *buffer)
 		{
 			if ((_strcmp(dent->d_name, ".") == 1)
 			|| (_strcmp(dent->d_name, "..") == 1))
-			{
 				continue;
-			}
+
 			if (_strcmp(buffer, dent->d_name) == 1)
 			{
 				command = command_tok(buffer);
 				filepath = set_filepath(head->str, buffer);
-				printf("filepath: [%s]\n", filepath);
 				child = fork();
 				if (!child)
 					execve((const char *)filepath, command, NULL);
@@ -81,6 +94,9 @@ int search_dir(list_t *head, char *buffer)
 		closedir(directory);
 		head = head->next;
 	}
-	printf("not found");
+
+	printf("command not found\n");
 	return (-1);
+	}
+	return (0);
 }

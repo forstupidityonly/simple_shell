@@ -14,7 +14,6 @@ list_t *path_tok(char *s, list_t *node)
 {
 	char *token;
 
-	printf("path = %s\n", s);
 	token = strtok(s, ":");
 	add_node(&node, token);
 

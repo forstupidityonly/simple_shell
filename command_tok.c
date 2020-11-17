@@ -21,12 +21,14 @@ char **command_tok(char *buffer)
 		if (buffer[i] == ' ')
 			++argcount;
 	}
+	++argcount;
 
 	command = malloc(sizeof(char *) * (argcount + 1));
 
 	command[0] = strtok(buffer, " ");
 	for (i = 1; i < argcount; i++)
 		command[i] = strtok(NULL, " ");
+	command[i] = NULL;
 
 	return (command);
 }

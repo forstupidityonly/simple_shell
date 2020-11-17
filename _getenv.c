@@ -18,7 +18,7 @@ char *_getenv(char *name)
 	name_cpy = malloc(sizeof(char) * (len + 1));
 	if (!name_cpy)
 		return (NULL);
-	_strcpy(name_cpy, name, len);
+	_strcpy(name_cpy, name, len + 1);
 	env_val = strtok(environ[i], "=");
 	while (environ[i])
 	{
