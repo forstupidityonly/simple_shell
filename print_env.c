@@ -1,8 +1,12 @@
 #include "shell.h"
+
 /**
-  *
-  */
-int print_env()
+ * print_env - prints the environ variable to stdout
+ *
+ * Return: void
+ */
+
+int print_env(void)
 {
 	unsigned int i = 0, j = 0;
 

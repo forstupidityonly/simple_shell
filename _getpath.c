@@ -1,8 +1,11 @@
 #include "shell.h"
 
 /**
+ * _getpath - cycles through the environ variable and duplicates the PATH
  *
+ * @name: const string of "PATH"
  *
+ * Return: character pointer to duplicated PATH variable
  */
 
 char *_getpath(char *name)
@@ -19,11 +22,6 @@ char *_getpath(char *name)
 			else if (name[j] == '\0')
 			{
 				path_cpy = _strdup(environ[i]);
-/*				printf("path_cpy: %s\n", path_cpy);
-				strtok(path_cpy, "\n");
-				strtok(path_cpy, "=");
-				path_cpy= strtok(NULL, "=");
-				printf("path_cpy: %s\n", path_cpy); */
 				return (path_cpy);
 			}
 			else

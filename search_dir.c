@@ -32,6 +32,43 @@ char *set_filepath(char *path_token, char *filename)
 }
 
 /**
+ * slash_check - checks buffer if is starts with a / and then
+ * treats input as full path to command
+ *
+ * @filepath: path to command
+ * @buffer: input from user
+ * @command: first input from user (argv[0])
+ * @check: boolean to see if command is found
+ * @child: child process identifier
+ *
+ * Return: 1 onc success
+ * OR 0 if not found
+ */
+
+int slash_check(char *filepath, char *buffer,
+char **command, int check, pid_t child)
+{
+	int stat;
+
+	if (buffer[0] == '/')
+	{
+		filepath = buffer;
+		strtok(filepath, "\n");
+		command = command_tok(buffer);
+		child = fork();
+		if (!child)
+			check = execve((const char *)filepath, command, NULL);
+		else
+			wait(&stat);
+		if (check == -1)
+			write(1, "command not found\n", 18);
+		free(command);
+		return (1);
+	}
+	return (0);
+}
+
+/**
  * search_dir - this searches through the path for matching
  * directory from env variable
  *
@@ -47,56 +84,41 @@ int search_dir(list_t *head, char *buffer)
 {
 	DIR *directory;
 	struct dirent *dent;
-	char *filepath;
-	char **command = NULL;
-	int status;
-	int check = 0;
-	pid_t child;
+	char *filepath = NULL, **command = NULL;
+	int status, check = 0, is_slash = 0;
+	pid_t child = 0;
 
-	if (buffer[0] == '/')
+	is_slash = slash_check(filepath, buffer, command, check, child);
+	if (!is_slash)
 	{
-		filepath = buffer;
-		strtok(filepath, "\n");
-		command = command_tok(buffer);
-		child = fork();
-		if (!child)
-			check = execve((const char *)filepath, command, NULL);
-		else
-			wait(&status);
-		if (check == -1)
-			write(1, "command not found\n", 18);
-		free(command);
-	} else {
-	while (head->next != NULL)
-	{
-		directory = opendir(head->str);
-		while ((dent = readdir(directory)) != NULL)
+		while (head->next != NULL)
 		{
-			if ((_strcmp(dent->d_name, ".") == 1)
-			|| (_strcmp(dent->d_name, "..") == 1))
-				continue;
-
-			if (_strcmp(buffer, dent->d_name) == 1)
+			directory = opendir(head->str);
+			while ((dent = readdir(directory)) != NULL)
 			{
-				command = command_tok(buffer);
-				filepath = set_filepath(head->str, buffer);
-				child = fork();
-				if (!child)
-					execve((const char *)filepath, command, NULL);
-				else
-					wait(&status);
-				closedir(directory);
-				free(filepath);
-				free(command);
-				return (1);
+				if ((_strcmp(dent->d_name, ".") == 1)
+				|| (_strcmp(dent->d_name, "..") == 1))
+					continue;
+				if (_strcmp(buffer, dent->d_name) == 1)
+				{
+					command = command_tok(buffer);
+					filepath = set_filepath(head->str, buffer);
+					child = fork();
+					if (!child)
+						execve((const char *)filepath, command, NULL);
+					else
+						wait(&status);
+					closedir(directory);
+					free(filepath);
+					free(command);
+					return (1);
+				}
 			}
+			closedir(directory);
+			head = head->next;
 		}
-		closedir(directory);
-		head = head->next;
-	}
-
-	printf("command not found\n");
-	return (-1);
+		printf("command not found\n");
+		return (-1);
 	}
 	return (0);
 }
