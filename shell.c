@@ -10,7 +10,7 @@ int main(void)
 {
 	char *buffer = NULL;
 	ssize_t chars;
-	size_t bufsize = 0;
+	size_t bufsize = 1024;
 	char *s;
 	list_t *head;
 	list_t *node = NULL;
@@ -18,7 +18,7 @@ int main(void)
 	char *env = "env";
 
 	head = node;
-	s = _getenv("PATH");
+	s = _getpath("PATH");
 	head = path_tok(s, node);
 
 	while (1)
@@ -40,6 +40,7 @@ int main(void)
 		bufsize = 0;
 	}
 	free_list(head);
+	free(s);
 	free(buffer);
 	return (0);
 }

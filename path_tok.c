@@ -14,9 +14,12 @@ list_t *path_tok(char *s, list_t *node)
 {
 	char *token;
 
+
+	token = strtok(s, "PATH=");
+	token = strtok(s, "\n");
+
 	token = strtok(s, ":");
 	add_node(&node, token);
-
 	while (token != NULL)
 	{
 		token = strtok(NULL, ":");

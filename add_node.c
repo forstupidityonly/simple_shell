@@ -10,7 +10,7 @@
  * Return: pointer to new node
  */
 
-list_t *add_node(list_t **node, const char *token)
+list_t *add_node(list_t **node, char *token)
 {
 	int i = 0;
 	list_t *duplicate;
@@ -22,7 +22,7 @@ list_t *add_node(list_t **node, const char *token)
 		return (NULL);
 	while (token[i])
 		i++;
-	duplicate->str = strdup(token);
+	duplicate->str = _strdup(token);
 	if (!(duplicate->str))
 	{
 		free(duplicate);

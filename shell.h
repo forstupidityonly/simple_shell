@@ -38,13 +38,14 @@ char *_strcpy(char *dest, char *src, int n);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
 char *_getenv(char *name);
-/* size_t print_list(const list_t *h); */
+/*size_t print_list(const list_t *h);*/
 list_t *path_tok(char *s, list_t *node);
-list_t *add_node(list_t **node, const char *token);
+list_t *add_node(list_t **node, char *token);
 void free_list(list_t *head);
 int search_dir(list_t *head, char *buffer);
 int _strlen(char *s);
 char **command_tok(char *buffer);
 int print_env();
+char *_getpath(char *name);
 
 #endif
