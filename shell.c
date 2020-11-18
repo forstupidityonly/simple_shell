@@ -14,8 +14,8 @@ int main(void)
 	char *s;
 	list_t *head;
 	list_t *node = NULL;
-	int i = 0;
 	char *exit = "exit";
+	char *env = "env";
 
 	head = node;
 	s = _getenv("PATH");
@@ -26,15 +26,14 @@ int main(void)
 		if (isatty(STDIN_FILENO))
 			write(1, "prompt$ ", 8);
 		chars = getline(&buffer, &bufsize, stdin);
-		i = _strcmp(buffer, exit);
-		if (i == 1)
+		if (_strcmp(buffer, exit))
 			break;
+		if (_strcmp(buffer, env))
+			print_env();
 		if (chars == EOF)
 		{
 			write(1, "EOF\n", 4);
-			free_list(head);
-			free(buffer);
-			return (0);
+			break;
 		}
 		search_dir(head, buffer);
 		free(buffer);

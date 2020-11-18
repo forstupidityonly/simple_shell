@@ -45,5 +45,6 @@ void free_list(list_t *head);
 int search_dir(list_t *head, char *buffer);
 int _strlen(char *s);
 char **command_tok(char *buffer);
+int print_env();
 
 #endif
