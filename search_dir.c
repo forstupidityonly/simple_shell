@@ -80,7 +80,7 @@ char **command, int check, pid_t child)
  * OR match not found
  */
 
-int search_dir(list_t *head, char *buffer)
+int search_dir(list_t *head, char *buffer, char *s)
 {
 	DIR *directory;
 	struct dirent *dent;
@@ -105,7 +105,19 @@ int search_dir(list_t *head, char *buffer)
 					filepath = set_filepath(head->str, buffer);
 					child = fork();
 					if (!child)
-						execve((const char *)filepath, command, NULL);
+					{
+						check = execve((const char *)filepath, command, NULL);
+						if (check == -1)
+						{
+							write(2, "command not found\n", 18);
+							closedir(directory);
+							free_list(head);
+							free(s);
+							free(filepath);
+							free(command);
+							kill(getpid(), SIGKILL);
+						}
+					}
 					else
 						wait(&status);
 					closedir(directory);
@@ -117,7 +129,7 @@ int search_dir(list_t *head, char *buffer)
 			closedir(directory);
 			head = head->next;
 		}
-		printf("command not found\n");
+		write(2, "command not found\n", 18);
 		return (-1);
 	}
 	return (0);
