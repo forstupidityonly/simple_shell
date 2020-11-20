@@ -68,6 +68,7 @@ char **command, int check, pid_t child)
 		return (1);
 		}
 	}
+	free(command);
 	return (0);
 }
 
@@ -116,11 +117,11 @@ int search_dir(list_t *head, char *buffer, char *s)
 						if (check == -1)
 						{
 							write(2, "command not found\n", 18);
-							closedir(directory);
 							free_list(head);
 							free(s);
 							free(filepath);
 							free(command);
+							closedir(directory);
 							kill(getpid(), SIGKILL);
 						}
 					}
@@ -135,6 +136,7 @@ int search_dir(list_t *head, char *buffer, char *s)
 			closedir(directory);
 			head = head->next;
 		}
+		free(command);
 		write(2, "command not found\n", 18);
 		return (-1);
 	}

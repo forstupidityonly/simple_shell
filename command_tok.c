@@ -20,7 +20,6 @@ char **command_tok(char *buffer)
 			++argcount;
 	}
 	++argcount;
-	printf("argcount: %d\n", argcount);
 
 	command = malloc(sizeof(char *) * (argcount + 1));
 
@@ -29,7 +28,5 @@ char **command_tok(char *buffer)
 		command[i] = strtok(NULL, " ");
 	command[i] = NULL;
 
-	for (i = 0; command[i]; i++)
-		printf("com: %s\n", command[i]);
 	return (command);
 }
