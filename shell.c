@@ -29,9 +29,9 @@ int main(void)
 		if (chars > 1)
 			buffer[chars - 1] = '\0';
 		if (chars == EOF)
-                {
-                        break;
-                }
+		{
+			break;
+		}
 		else if (_strcmp_exact(buffer, exit) == 0)
 			break;
 		else if (_strcmp_exact(buffer, env) == 0)

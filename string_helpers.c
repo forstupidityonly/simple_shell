@@ -44,9 +44,10 @@ char *_strcpy(char *dest, char *src, int n)
 }
 
 /**
- *
- *
- *
+ * _strcmp_exact - strcmp exact function
+ * @s1: 1 string
+ * @s2: 2 string
+ * Return: int
  */
 
 int _strcmp_exact(char *s1, char *s2)

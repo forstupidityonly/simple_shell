@@ -78,7 +78,7 @@ char **command, int check, pid_t child)
  *
  * @head: linked list of PATH
  * @buffer: token from buffer to find in dir
- *
+ * @s: string
  * Return: pointer to a matched file
  * OR -1 if fail
  * OR match not found
