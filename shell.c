@@ -26,16 +26,18 @@ int main(void)
 		if (isatty(STDIN_FILENO))
 			write(1, "prompt$ ", 8);
 		chars = getline(&buffer, &bufsize, stdin);
+		buffer[chars - 1] = '\0';
 		if (_strcmp_exact(buffer, exit) == 0)
 			break;
-		if (_strcmp_exact(buffer, env) == 0)
+		else if (_strcmp_exact(buffer, env) == 0)
 			print_env();
-		if (chars == EOF)
+		else if (chars == EOF)
 		{
 			write(1, "EOF\n", 4);
 			break;
 		}
-		search_dir(head, buffer, s);
+		else
+			search_dir(head, buffer, s);
 		free(buffer);
 		bufsize = 0;
 	}

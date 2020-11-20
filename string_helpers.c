@@ -51,24 +51,19 @@ char *_strcpy(char *dest, char *src, int n)
 
 int _strcmp_exact(char *s1, char *s2)
 {
-	while (*s1)
+	while (*s1 && *s2)
 	{
 		if (*s1 == *s2)
 		{
 			s1++;
 			s2++;
 		}
-		else if (*s1 == '\n')
-		{
-			s1--;
-			s2--;
-			break;
-		}
 		else
 			break;
 	}
 	return (*s1 - *s2);
 }
+
 /**
  * _strcmp - compates to char strings to see if the match
  *

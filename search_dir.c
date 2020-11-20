@@ -55,6 +55,8 @@ char **command, int check, pid_t child)
 		filepath = buffer;
 		strtok(filepath, "\n");
 		command = command_tok(buffer);
+		if (access(filepath, F_OK) == 0)
+		{
 		child = fork();
 		if (!child)
 			check = execve((const char *)filepath, command, NULL);
@@ -64,6 +66,7 @@ char **command, int check, pid_t child)
 			write(1, "command not found\n", 18);
 		free(command);
 		return (1);
+		}
 	}
 	return (0);
 }
@@ -88,20 +91,23 @@ int search_dir(list_t *head, char *buffer, char *s)
 	int status, check = 0, is_slash = 0;
 	pid_t child = 0;
 
+	while (*buffer == ' ')
+		++buffer;
+
 	is_slash = slash_check(filepath, buffer, command, check, child);
 	if (!is_slash)
 	{
+		command = command_tok(buffer);
 		while (head->next != NULL)
 		{
 			directory = opendir(head->str);
 			while ((dent = readdir(directory)) != NULL)
 			{
-				if ((_strcmp(dent->d_name, ".") == 1)
-				|| (_strcmp(dent->d_name, "..") == 1))
+				if ((_strcmp_exact(dent->d_name, ".") == 0)
+				|| (_strcmp_exact(dent->d_name, "..") == 0))
 					continue;
-				if (_strcmp(buffer, dent->d_name) == 1)
+				if (_strcmp_exact(buffer, dent->d_name) == 0)
 				{
-					command = command_tok(buffer);
 					filepath = set_filepath(head->str, buffer);
 					child = fork();
 					if (!child)
