@@ -20,7 +20,7 @@ int main(void)
 	head = node;
 	s = _getpath("PATH");
 	head = path_tok(s, node);
-
+	signal(SIGINT, SIG_IGN);
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
