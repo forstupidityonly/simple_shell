@@ -71,7 +71,45 @@ char **command, int check, pid_t child)
 	free(command);
 	return (0);
 }
+/**
+  * execute - execute
+  * @filepath: filepath
+  * @head: head
+  * @buffer: user imput
+  * @command: toked command
+  * @s: just s
+  * @directory: the directory
+  * @child: process
+  * @check: a check
+  * Return: no
+  */
+void execute(char *filepath, list_t *head, char *buffer, char **command,
+char *s, DIR *directory, pid_t child, int check)
+{
+	int status;
 
+	filepath = set_filepath(head->str, buffer);
+	child = fork();
+	if (!child)
+	{
+		check = execve((const char *)filepath, command, NULL);
+		if (check == -1)
+		{
+			write(2, "command not found\n", 18);
+			free_list(head);
+			free(s);
+			free(filepath);
+			free(command);
+			closedir(directory);
+			kill(getpid(), SIGKILL);
+		}
+	}
+	else
+		wait(&status);
+	closedir(directory);
+	free(filepath);
+	free(command);
+}
 /**
  * search_dir - this searches through the path for matching
  * directory from env variable
@@ -89,12 +127,11 @@ int search_dir(list_t *head, char *buffer, char *s)
 	DIR *directory;
 	struct dirent *dent;
 	char *filepath = NULL, **command = NULL;
-	int status, check = 0, is_slash = 0;
+	int check = 0, is_slash = 0;
 	pid_t child = 0;
 
 	while (*buffer == ' ')
 		++buffer;
-
 	is_slash = slash_check(filepath, buffer, command, check, child);
 	if (!is_slash)
 	{
@@ -109,27 +146,8 @@ int search_dir(list_t *head, char *buffer, char *s)
 					continue;
 				if (_strcmp_exact(buffer, dent->d_name) == 0)
 				{
-					filepath = set_filepath(head->str, buffer);
-					child = fork();
-					if (!child)
-					{
-						check = execve((const char *)filepath, command, NULL);
-						if (check == -1)
-						{
-							write(2, "command not found\n", 18);
-							free_list(head);
-							free(s);
-							free(filepath);
-							free(command);
-							closedir(directory);
-							kill(getpid(), SIGKILL);
-						}
-					}
-					else
-						wait(&status);
-					closedir(directory);
-					free(filepath);
-					free(command);
+					execute(filepath, head, buffer,
+command, s, directory, child, check);
 					return (1);
 				}
 			}
