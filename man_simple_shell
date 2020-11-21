@@ -1,0 +1,34 @@
+.TH SHELL 3 "20 November 2020" "Version 1.0"
+.SH NAME
+C_SHELL - for_the_shell_of_it
+
+.SH SYNOPSIS
+prompt$ [options] [file]
+
+.SH DESCRIPTION
+
+Simply put, the shell is a program that takes commands from the keyboard and gives them to the operating system to perform. On most Linux systems a program called bash (which stands for Bourne Again SHell, an enhanced version of the original Unix shell program, sh, written by Steve Bourne) acts as the shell program. This is a simple rendition of the BASH shell written in C for educational purpouses.
+
+.SH USAGE
+	In addition to searching path for executables, the following features are supported:
+
+	Ctrl+D - End of file: exit shell
+	exit - exit shell
+	env - print the enviroment variables
+
+.SH EXAMPLE
+
+prompt$ ls
+
+a.out main.c hedder.h
+
+prompt$ exit
+
+$
+
+.SH BUGS
+No known bugs
+
+.SH AUTHOR
+	Corbin VanDeventer Github: (forstupidityonly)
+	Ayden Townsly Github: (aydentownsley)
