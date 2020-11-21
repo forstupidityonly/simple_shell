@@ -48,5 +48,9 @@ int _strlen(char *s);
 char **command_tok(char *buffer);
 int print_env(void);
 char *_getpath(char *name);
-void execute(char *filepath, list_t *head, char *buffer, char **command, char *s, DIR *directory, pid_t child, int check);
+void execute(char *filepath, list_t *head, char *buffer, char **command,
+char *s, DIR *directory, pid_t child, int check);
+int _atoi(char *s);
+int exit_stat(char *buffer, list_t *head, char *s);
+void free_space(list_t *head, char *s, char *buffer);
 #endif

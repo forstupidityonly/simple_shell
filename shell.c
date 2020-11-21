@@ -8,14 +8,10 @@
 
 int main(void)
 {
-	char *buffer = NULL;
+	char *buffer = NULL, *ext = "exit", *env = "env", *s;
 	ssize_t chars;
 	size_t bufsize = 1024;
-	char *s;
-	list_t *head;
-	list_t *node = NULL;
-	char *exit = "exit";
-	char *env = "env";
+	list_t *head, *node = NULL;
 
 	head = node;
 	s = _getpath("PATH");
@@ -26,14 +22,22 @@ int main(void)
 		if (isatty(STDIN_FILENO))
 			write(1, "prompt$ ", 8);
 		chars = getline(&buffer, &bufsize, stdin);
-		if (chars > 1)
+		if (chars == 1)
+			continue;
+		else if (chars > 1)
 			buffer[chars - 1] = '\0';
 		if (chars == EOF)
 		{
 			break;
 		}
-		else if (_strcmp_exact(buffer, exit) == 0)
+		else if (_strcmp_exact(buffer, ext) == 0)
 			break;
+		else if (_strcmp(buffer, ext) == 1)
+		{
+			exit_stat(buffer, head, s);
+			write(2, "command not found\n", 18);
+			continue;
+		}
 		else if (_strcmp_exact(buffer, env) == 0)
 			print_env();
 		else
@@ -41,8 +45,6 @@ int main(void)
 		free(buffer);
 		bufsize = 0;
 	}
-	free_list(head);
-	free(s);
-	free(buffer);
+	free_space(head, s, buffer);
 	return (0);
 }
