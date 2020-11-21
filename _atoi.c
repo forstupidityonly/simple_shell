@@ -29,7 +29,7 @@ s[len + 1] <= 57))
 			return (-1);
 		else if ((s[len] < 48 || s[len] > 57) && tmp != 0)
 			return (-1);
-		else
+		else if (1 == 1)
 			break;
 		len++;
 	}
@@ -53,10 +53,7 @@ int exit_stat(char *buffer, list_t *head, char *s)
 
 	if (buffer[0] != 'e' || buffer[1] != 'x' || buffer[2] != 'i' || buffer[
 3] != 't' || buffer[4] != ' ')
-	{
-		printf("should be doing this\n");
 		return (-1);
-	}
 	while (*buffer != ' ')
 	{
 		++i;
