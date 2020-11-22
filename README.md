@@ -70,7 +70,7 @@ entered by the user. If the command is found to match one found in the path, it 
 handed off to excecve to be run. It also sets the filepath using a helper function
 set\_filepath that appens the command onto the full path where the command was found.
 
-(the command ls is found is /bin
+(the command ls is found is /bin)
 ```
 prompt$ ls
 ```
@@ -81,8 +81,8 @@ handles any modifiers entered alongside ls.
 ```
 prompt$ ls -1 -a -l
 ```
--1 = list one entry per line.
--a = list all contents of directory, including hiddens ones.
+-1 = list one entry per line.\
+-a = list all contents of directory, including hiddens ones.\
 -l = list the long version of each entry
 
 ## *add_node.c*
