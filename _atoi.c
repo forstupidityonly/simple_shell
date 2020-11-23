@@ -49,10 +49,16 @@ s[len + 1] <= 57))
 int exit_stat(char *buffer, list_t *head, char *s)
 {
 	int ext_val = -1;
-	int i = 0;
+	int i = 0, j = 0;
 
-	if (buffer[0] != 'e' || buffer[1] != 'x' || buffer[2] != 'i' || buffer[
-3] != 't' || buffer[4] != ' ')
+
+	while (*buffer == ' ')
+	{
+		j++;
+		++buffer;
+	}
+	if (buffer[0] != 'e' || buffer[1] != 'x' || buffer[2] !=
+'i' || buffer[3] != 't' || buffer[4] != ' ')
 		return (-1);
 	while (*buffer != ' ')
 	{
@@ -69,7 +75,7 @@ int exit_stat(char *buffer, list_t *head, char *s)
 	if (ext_val == -1)
 		return (-1);
 
-	buffer = buffer - i;
+	buffer = buffer - (i + j);
 	free_list(head);
 	free(buffer);
 	free(s);
