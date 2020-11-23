@@ -11,6 +11,7 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <errno.h>
 
 /*____ STRUCTURES _____*/
 
@@ -34,6 +35,7 @@ typedef struct list_s
 /*_____ PROTOTYPES ____*/
 
 extern char **environ;
+extern int errno;
 char *_strcpy(char *dest, char *src, int n);
 int _strcmp(char *s1, char *s2);
 int _strcmp_exact(char *s1, char *s2);
@@ -53,4 +55,5 @@ char *s, DIR *directory, pid_t child, int check);
 int _atoi(char *s);
 int exit_stat(char *buffer, list_t *head, char *s);
 void free_space(list_t *head, char *s, char *buffer);
+void print_error(char *buffer, int argc, char **argv);
 #endif

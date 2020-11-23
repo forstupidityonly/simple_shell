@@ -6,12 +6,13 @@
  * Return: 0 when terminated
  */
 
-int main(void)
+int main(int argc, char **argv)
 {
 	char *buffer = NULL, *ext = "exit", *env = "env", *s;
 	ssize_t chars;
 	size_t bufsize = 1024;
 	list_t *head, *node = NULL;
+	argc = 1;
 
 	head = node;
 	s = _getpath("PATH");
@@ -35,7 +36,7 @@ int main(void)
 		else if (_strcmp(buffer, ext) == 1)
 		{
 			exit_stat(buffer, head, s);
-			write(2, "command not found\n", 18);
+			print_error(buffer, argc, argv);
 			continue;
 		}
 		else if (_strcmp_exact(buffer, env) == 0)
@@ -44,6 +45,7 @@ int main(void)
 			search_dir(head, buffer, s);
 		free(buffer);
 		bufsize = 0;
+		argc += 1;
 	}
 	free_space(head, s, buffer);
 	return (0);

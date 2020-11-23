@@ -59,7 +59,7 @@ char **command, int check, pid_t child)
 		{
 		child = fork();
 		if (!child)
-			check = execve((const char *)filepath, command, NULL);
+			check = execve((const char *)filepath, command, environ);
 		else
 			wait(&stat);
 		if (check == -1)
@@ -92,7 +92,7 @@ char *s, DIR *directory, pid_t child, int check)
 	child = fork();
 	if (!child)
 	{
-		check = execve((const char *)filepath, command, NULL);
+		check = execve((const char *)filepath, command, environ);
 		if (check == -1)
 		{
 			write(2, "command not found\n", 18);
