@@ -52,6 +52,8 @@ char *_strcpy(char *dest, char *src, int n)
 
 int _strcmp_exact(char *s1, char *s2)
 {
+	while (*s1 == ' ')
+		s1++;
 	while (*s1 && *s2)
 	{
 		if (*s1 == *s2)
@@ -81,6 +83,9 @@ int _strcmp_exact(char *s1, char *s2)
 int _strcmp(char *s1, char *s2)
 {
 	unsigned int i = 0;
+
+	while (*s1 == ' ')
+		s1++;
 
 	while (s2[i])
 	{
