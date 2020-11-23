@@ -84,7 +84,7 @@ char **command, int check, pid_t child)
   * Return: no
   */
 void execute(char *filepath, list_t *head, char *buffer, char **command,
-char *s, DIR *directory, pid_t child, int check)
+char *s, DIR *directory, pid_t child, int check, int argc, char **argv)
 {
 	int status;
 
@@ -95,7 +95,7 @@ char *s, DIR *directory, pid_t child, int check)
 		check = execve((const char *)filepath, command, environ);
 		if (check == -1)
 		{
-			write(2, "command not found\n", 18);
+			print_error(buffer, argc, argv);
 			free_list(head);
 			free(s);
 			free(filepath);
@@ -122,7 +122,7 @@ char *s, DIR *directory, pid_t child, int check)
  * OR match not found
  */
 
-int search_dir(list_t *head, char *buffer, char *s)
+int search_dir(list_t *head, char *buffer, char *s, int argc, char **argv)
 {
 	DIR *directory;
 	struct dirent *dent;
@@ -147,7 +147,7 @@ int search_dir(list_t *head, char *buffer, char *s)
 				if (_strcmp_exact(buffer, dent->d_name) == 0)
 				{
 					execute(filepath, head, buffer,
-command, s, directory, child, check);
+command, s, directory, child, check, argc, argv);
 					return (1);
 				}
 			}
@@ -155,7 +155,7 @@ command, s, directory, child, check);
 			head = head->next;
 		}
 		free(command);
-		write(2, "command not found\n", 18);
+		print_error(buffer, argc, argv);
 		return (-1);
 	}
 	return (0);

@@ -37,6 +37,15 @@ s[len + 1] <= 57))
 	return (tmp * sign);
 }
 
+int _itoa(int num)
+{
+
+	if (num/10)
+		_itoa(num/10);
+	num = (num % 10) + 48;
+	write(2, &num, 1);
+	return (0);
+}
 /**
  * exit_stat - exits with status
  *

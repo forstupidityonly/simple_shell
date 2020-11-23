@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 		else if (_strcmp_exact(buffer, env) == 0)
 			print_env();
 		else
-			search_dir(head, buffer, s);
+			search_dir(head, buffer, s, argc, argv);
 		free(buffer);
 		bufsize = 0;
 		argc += 1;

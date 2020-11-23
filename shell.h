@@ -41,19 +41,19 @@ int _strcmp(char *s1, char *s2);
 int _strcmp_exact(char *s1, char *s2);
 char *_strdup(char *str);
 char *_getenv(char *name);
-/*size_t print_list(const list_t *h);*/
 list_t *path_tok(char *s, list_t *node);
 list_t *add_node(list_t **node, char *token);
 void free_list(list_t *head);
-int search_dir(list_t *head, char *buffer, char *s);
+int search_dir(list_t *head, char *buffer, char *s, int argc, char **argv);
 int _strlen(char *s);
 char **command_tok(char *buffer);
 int print_env(void);
 char *_getpath(char *name);
 void execute(char *filepath, list_t *head, char *buffer, char **command,
-char *s, DIR *directory, pid_t child, int check);
+char *s, DIR *directory, pid_t child, int check, int argc, char **argv);
 int _atoi(char *s);
 int exit_stat(char *buffer, list_t *head, char *s);
 void free_space(list_t *head, char *s, char *buffer);
 void print_error(char *buffer, int argc, char **argv);
+ int _itoa(int num);
 #endif
