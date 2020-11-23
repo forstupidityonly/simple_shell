@@ -6,7 +6,6 @@
  *
  * @path_token: strtok of path
  * @filename: buffer from getline
- *
  * Return: pointer to path char string
  */
 
@@ -81,6 +80,8 @@ char **command, int check, pid_t child)
   * @directory: the directory
   * @child: process
   * @check: a check
+  * @argc: loop count
+  * @argv: ./hsh
   * Return: no
   */
 void execute(char *filepath, list_t *head, char *buffer, char **command,
@@ -117,6 +118,8 @@ char *s, DIR *directory, pid_t child, int check, int argc, char **argv)
  * @head: linked list of PATH
  * @buffer: token from buffer to find in dir
  * @s: string
+ * @argc: loop count
+ * @argv: ./hsh
  * Return: pointer to a matched file
  * OR -1 if fail
  * OR match not found

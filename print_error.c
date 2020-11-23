@@ -4,8 +4,9 @@
  * print_error - prints formatted errors to
  * standard error
  *
- * @command:
- *
+ * @buffer: input from getline
+ * @argc: loop count
+ * @argv: ./hsh
  * Return: void
  */
 

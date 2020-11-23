@@ -37,11 +37,16 @@ s[len + 1] <= 57))
 	return (tmp * sign);
 }
 
+/**
+ * _itoa - prints int
+ * @num: input number
+ * Return: 0
+ */
 int _itoa(int num)
 {
 
-	if (num/10)
-		_itoa(num/10);
+	if (num / 10)
+		_itoa(num / 10);
 	num = (num % 10) + 48;
 	write(2, &num, 1);
 	return (0);

@@ -55,5 +55,6 @@ int _atoi(char *s);
 int exit_stat(char *buffer, list_t *head, char *s);
 void free_space(list_t *head, char *s, char *buffer);
 void print_error(char *buffer, int argc, char **argv);
- int _itoa(int num);
+int _itoa(int num);
+
 #endif

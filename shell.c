@@ -3,6 +3,8 @@
 /**
  * main - runs a simple shell
  *
+ * @argc: loop count
+ * @argv: ./hsh
  * Return: 0 when terminated
  */
 
@@ -12,8 +14,8 @@ int main(int argc, char **argv)
 	ssize_t chars;
 	size_t bufsize = 1024;
 	list_t *head, *node = NULL;
-	argc = 1;
 
+	argc = 1;
 	head = node;
 	s = _getpath("PATH");
 	head = path_tok(s, node);
@@ -28,9 +30,7 @@ int main(int argc, char **argv)
 		else if (chars > 1)
 			buffer[chars - 1] = '\0';
 		if (chars == EOF)
-		{
 			break;
-		}
 		else if (_strcmp_exact(buffer, ext) == 0)
 			break;
 		else if (_strcmp(buffer, ext) == 1)
